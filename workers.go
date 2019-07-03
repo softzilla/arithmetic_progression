@@ -89,14 +89,15 @@ func AddWorker(w http.ResponseWriter, r *http.Request) {
 // GetWorkerList sorts workerPool according to their statius firstly, to NumInQueue then; prints all the results out via standart output
 func GetWorkerList(w http.ResponseWriter, r *http.Request) {
 
-	sort.Slice(workerPool, func(i, j int) bool {
-		if workerPool[i].Status == workerPool[j].Status {
-			return workerPool[i].NumInQueue > workerPool[j].NumInQueue
-		}
-		st := map[string]int{
+	st := map[string]int{
 			Wait: 0,
 			Work: 1,
 			Done: 2,
+		}
+	
+	sort.Slice(workerPool, func(i, j int) bool {
+		if workerPool[i].Status == workerPool[j].Status {
+			return workerPool[i].NumInQueue > workerPool[j].NumInQueue
 		}
 		return st[workerPool[i].Status] < st[workerPool[j].Status]
 	})
