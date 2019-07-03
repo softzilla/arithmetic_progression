@@ -103,17 +103,8 @@ func GetWorkerList(w http.ResponseWriter, r *http.Request) {
 
 	for _, worker := range workerPool { // parse our dates/times so that the result isn't too long
 		dateSchedule := parsedate(worker.ScheduleTime)
-		if dateSchedule == "0:0:0" {
-			dateSchedule = ""
-		}
 		dateStart := parsedate(worker.StartTime)
-		if dateSchedule == "0:0:0" {
-			dateStart = ""
-		}
 		dateFinish := parsedate(worker.FinishTime)
-		if dateSchedule == "0:0:0" {
-			dateFinish = ""
-		}
 
 		w.Write([]byte(fmt.Sprintf("%v\t%v\t%v\t%v\t%v\t%vs\t%v\t%v\t%v\t%v\t%v\t\n",
 			worker.NumInQueue, worker.Status, worker.ElemQ, worker.ElemToChange,
