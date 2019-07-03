@@ -160,6 +160,7 @@ func deleteElem(w *Worker) {
 		if item == w {
 			mu.Lock()
 			workerPool[indx], workerPool[len(workerPool)-1] = workerPool[len(workerPool)-1], workerPool[indx]
+			workerPool[len(workerPool)-1] = nil
 			workerPool = workerPool[:len(workerPool)-1]
 			mu.Unlock()
 
